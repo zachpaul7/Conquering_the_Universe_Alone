@@ -1,0 +1,5 @@
+0,Scout,1,2
+0,Bomber,0,2
+0,Frigate,2,2
+0,Scout,0,2
+0,Dreadnought,2,2
