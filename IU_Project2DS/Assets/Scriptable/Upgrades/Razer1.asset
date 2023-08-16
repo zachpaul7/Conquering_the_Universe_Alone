@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b2f2389aabf4974097ef3ca71fbb582, type: 3}
-  m_Name: enemyStats
+  m_Script: {fileID: 11500000, guid: e1b280fc73b3a2e469f691266f6ad2e5, type: 3}
+  m_Name: Razer1
   m_EditorClassIdentifier: 
-  bulletDmg: 0
-  health: 1
-  speed: 3.1
-  objectName: L
+  upgradeType: 2
+  Name: Razer
+  icon: {fileID: 21300000, guid: 55b21b78844152942a1437e3a11f0630, type: 3}
+  wpIcon: {fileID: 21300000, guid: 2d99050e6292dfe4b990db4cde450280, type: 3}

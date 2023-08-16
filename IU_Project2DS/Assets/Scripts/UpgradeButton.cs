@@ -7,10 +7,12 @@ public class UpgradeButton : MonoBehaviour
 {
     [SerializeField]
     Image icon;
-
     public void Set(UpgradeData upgradeData)
     {
         icon.sprite = upgradeData.icon;
-
+    }
+    internal void Clean()
+    {
+        icon.sprite = null;
     }
 }

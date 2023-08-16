@@ -28,11 +28,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     UpgradePanelManager upgradePanelManager;
-    List<UpgradeData> selectedUpgrades;
+    [HideInInspector]
+    public List<UpgradeData> selectedUpgrades;
     [SerializeField]
-    List<UpgradeData> acquiredUpgrades;
-    [SerializeField]
-    public List<UpgradeData> upgrades;
+    public List<UpgradeData> acquiredUpgrades;
+    
 
 
     void Awake()
@@ -91,13 +91,20 @@ public class GameManager : MonoBehaviour
         player.transform.position = playerPos.position;
         // 스테이지 증가
         stage++;
-        if (stage > 2)
+        if (stage > 3)
         {
             Invoke("GameOver", 2);
         }
         else
         {
-            upgradePanelManager.OpenPanel(upgradeController.GetUpgrades(3));
+            if (selectedUpgrades == null)
+            {
+                selectedUpgrades = new List<UpgradeData>();
+            }
+            selectedUpgrades.Clear();
+            selectedUpgrades.AddRange(upgradeController.GetUpgrades(3));
+
+            upgradePanelManager.OpenPanel(selectedUpgrades);
             Invoke("StageStart", 2);
         }
     }
@@ -105,12 +112,8 @@ public class GameManager : MonoBehaviour
     {
         UpgradeData upgradeData = selectedUpgrades[selectedUpgradeId];
 
-        if (acquiredUpgrades == null)
-        {
-            acquiredUpgrades = new List<UpgradeData>();
-        }
         acquiredUpgrades.Add(upgradeData);
-        upgrades.Remove(upgradeData);
+        upgradeController.ApplyUpgrade(upgradeData);
     }
     void SpawnEnemy()
     {

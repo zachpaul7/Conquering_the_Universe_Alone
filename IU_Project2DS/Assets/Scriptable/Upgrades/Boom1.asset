@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1b280fc73b3a2e469f691266f6ad2e5, type: 3}
-  m_Name: Test4
+  m_Name: Boom1
   m_EditorClassIdentifier: 
   upgradeType: 2
-  Name: Test4
-  icon: {fileID: 21300000, guid: 048ca90b2029fa44da17ed51e5c81472, type: 3}
+  Name: Boom
+  icon: {fileID: 21300000, guid: f598f694020ef89418554e9448d49c2e, type: 3}
+  wpIcon: {fileID: 21300000, guid: 93684f9224a1bcd408d4733a7caba47d, type: 3}
