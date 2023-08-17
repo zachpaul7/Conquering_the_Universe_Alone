@@ -48,8 +48,8 @@ public class BFGWeapon : MonoBehaviour
 
     void FireBFG()
     {
-        GameObject BFGBullet = GameManager.instance.objectManager.MakeObj("Bullet_Player_BFGun");
-        BFGBullet.transform.position = GameManager.instance.playerMove.transform.position;
+        GameObject BFGBullet = ObjectManager.instance.MakeObj("Bullet_Player_BFGun");
+        BFGBullet.transform.position = ObjectManager.instance.playerMove.transform.position;
 
         Rigidbody2D rigid = BFGBullet.GetComponent<Rigidbody2D>();
 

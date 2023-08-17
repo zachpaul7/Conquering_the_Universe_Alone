@@ -43,14 +43,14 @@ public class AutoCanonWeapon : MonoBehaviour
 
     private void FireCanon()
     {
-        Vector3 position = GameManager.instance.playerMove.transform.position;
-        Quaternion rotation = GameManager.instance.playerMove.transform.rotation;
+        Vector3 position = ObjectManager.instance.playerMove.transform.position;
+        Quaternion rotation = ObjectManager.instance.playerMove.transform.rotation;
 
-        GameObject bulletR = GameManager.instance.objectManager.MakeObj("Bullet_Player_Cannon");
+        GameObject bulletR = ObjectManager.instance.MakeObj("Bullet_Player_Cannon");
         bulletR.transform.position = position + Vector3.right * 0.32f + Vector3.up * 0.25f;
         bulletR.transform.rotation = rotation;
 
-        GameObject bulletL = GameManager.instance.objectManager.MakeObj("Bullet_Player_Cannon");
+        GameObject bulletL = ObjectManager.instance.MakeObj("Bullet_Player_Cannon");
         bulletL.transform.position = position + Vector3.left * 0.32f + Vector3.up * 0.25f;
         bulletL.transform.rotation = rotation;
 

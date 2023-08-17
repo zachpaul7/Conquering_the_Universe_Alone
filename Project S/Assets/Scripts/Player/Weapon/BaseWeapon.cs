@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class BaseWeapon : MonoBehaviour
 {
-    public float fireRate = 0.3f; // 발사 속도 (총알 사이의 간격)
-    
+    [SerializeField] private float fireRate = 0.3f; // 발사 속도 (총알 사이의 간격)
 
     void Start()
     {
@@ -25,8 +24,8 @@ public class BaseWeapon : MonoBehaviour
     void Fire()
     {
         // 플레이어 캐릭터의 위치와 회전값에 따라 총알을 생성합니다.
-        GameObject bullet = GameManager.instance.objectManager.MakeObj("Bullet_Player_Cannon");
-        bullet.transform.position = GameManager.instance.playerMove.transform.position;
+        GameObject bullet = ObjectManager.instance.MakeObj("Bullet_Player_Cannon");
+        bullet.transform.position = ObjectManager.instance.playerMove.transform.position;
 
         // 총알의 Rigidbody2D 컴포넌트를 가져와 위쪽으로 힘을 가해 이동시킵니다.
         Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();

@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RocketWeapon : MonoBehaviour
 {
     Animator anim;
 
+    [SerializeField] private float coolingTime = 25.0f;
     bool isDelay;
-    public float coolingTime = 25.0f;
-
     bool isReload = false;
+
+    WaitForSeconds wfs1;
 
     void Start()
     {
         anim = GetComponent<Animator>();
+        wfs1 = new WaitForSeconds(0.16f);
     }
 
     void Update()
@@ -47,8 +50,8 @@ public class RocketWeapon : MonoBehaviour
         isReload = true;
 
         yield return new WaitForSeconds(coolingTime);
-        isReload = false;
 
+        isReload = false;
         isDelay = false;
     }
 
@@ -56,7 +59,8 @@ public class RocketWeapon : MonoBehaviour
     {
         for(int i = 0; i < 6; i++)
         {
-            yield return new WaitForSeconds(0.16f);
+            yield return wfs1;
+
             FireRocket(i);
         }
     }
@@ -95,7 +99,7 @@ public class RocketWeapon : MonoBehaviour
             rocketPosition += Vector3.right * 0.28f + Vector3.up * 0.1f;
         }
 
-        GameObject rocketBullet = GameManager.instance.objectManager.MakeObj("Bullet_Player_Rocket");
+        GameObject rocketBullet = ObjectManager.instance.MakeObj("Bullet_Player_Rocket");
         rocketBullet.transform.position = rocketPosition;
 
         Rigidbody2D rigid = rocketBullet.GetComponent<Rigidbody2D>();

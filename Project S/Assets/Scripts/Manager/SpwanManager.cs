@@ -18,7 +18,7 @@ public class SpwanManager : MonoBehaviour
     public int spawnIndex;
     public bool spawnEnd;
 
-    private int stage;
+    public int stage = 0;
 
     void Awake()
     {
@@ -58,7 +58,7 @@ public class SpwanManager : MonoBehaviour
         spawnEnd = false;
         
         // 지정된 텍스트 파일로부터 스폰 데이터 읽어오기
-        TextAsset textFile = Resources.Load("SpawnText/Act " + actNum + "/Stage " + stage) as TextAsset;
+        TextAsset textFile = Resources.Load("SpawnText/Act " + actNum + "/Stage " + PlayerPrefs.GetInt("stageNum")) as TextAsset;
         StringReader stringReader = new StringReader(textFile.text);
 
         // 텍스트 파일의 각 줄을 읽고 파싱하여 스폰 객체를 생성
@@ -122,7 +122,7 @@ public class SpwanManager : MonoBehaviour
         int enemyPoint = spawnList[spawnIndex].point;
 
         // 적 프리팹을 활성화
-        GameObject enemy = GetComponent<EnemyManager>().MakeObj(enemyIndex);
+        GameObject enemy = ObjectManager.instance.MakeObj(enemyIndex.ToString());
 
         // 적을 지정된 스폰 지점에 위치시킴
         enemy.transform.position = spawnPoints[enemyPoint].position;
