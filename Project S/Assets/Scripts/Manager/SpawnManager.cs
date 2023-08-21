@@ -5,9 +5,10 @@ using System.IO;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-public class SpwanManager : MonoBehaviour
+public class SpawnManager : MonoBehaviour
 {
     public int actNum;
+    public GameObject player;
 
     public float nextSpawnDelay;
     public float curSpawnDelay;
@@ -18,7 +19,9 @@ public class SpwanManager : MonoBehaviour
     public int spawnIndex;
     public bool spawnEnd;
 
-    public int stage = 0;
+    public int stage;
+    [SerializeField]
+    UpgradePanelManager upgradePanelManager;
 
     void Awake()
     {
@@ -39,18 +42,37 @@ public class SpwanManager : MonoBehaviour
             curSpawnDelay = 0;
         }
     }
-
-    public void StageStart()
+    void StageStart()
     {
         ReadSpawnFile();
-    }
 
+    }
     public void StageEnd()
     {
+        // Player Repos
+        player.transform.position = GameManager.instance.stageManager.playerPos.position;
+        // 스테이지 증가
         stage++;
+        if (stage > 2)
+        {
+            Invoke("GameOver", 2);
+        }
+        else
+        {
+            if (GameManager.instance.upgradeController.selectedUpgrades == null)
+            {
+                GameManager.instance.upgradeController.selectedUpgrades = new List<UpgradeData>();
+            }
+            GameManager.instance.upgradeController.selectedUpgrades.Clear();
+            GameManager.instance.upgradeController.selectedUpgrades.AddRange(GameManager.instance.upgradeController.GetUpgrades(3));
+
+            upgradePanelManager.OpenPanel(GameManager.instance.upgradeController.selectedUpgrades);
+            Invoke("StageStart", 2);
+        }
+
     }
 
-    void ReadSpawnFile()
+    public void ReadSpawnFile()
     {
         // 스폰 리스트를 비우고 스폰 인덱스와 스폰 종료 변수 초기화
         spawnList.Clear();
@@ -58,7 +80,7 @@ public class SpwanManager : MonoBehaviour
         spawnEnd = false;
         
         // 지정된 텍스트 파일로부터 스폰 데이터 읽어오기
-        TextAsset textFile = Resources.Load("SpawnText/Act " + actNum + "/Stage " + PlayerPrefs.GetInt("stageNum")) as TextAsset;
+        TextAsset textFile = Resources.Load("SpawnText/Act " + actNum + "/Stage " + stage) as TextAsset;
         StringReader stringReader = new StringReader(textFile.text);
 
         // 텍스트 파일의 각 줄을 읽고 파싱하여 스폰 객체를 생성
@@ -116,6 +138,9 @@ public class SpwanManager : MonoBehaviour
             case "Dreadnought":
                 enemyIndex = 5;
                 break;
+            case "End":
+                enemyIndex = 6;
+                break;
         }
 
         // enemyPoint를 spawnList에서 얻음
@@ -131,23 +156,23 @@ public class SpwanManager : MonoBehaviour
         Rigidbody2D rigid = enemy.GetComponent<Rigidbody2D>();
         Enemy enemyLogic = enemy.GetComponent<Enemy>();
 
-        //enemyLogic.player = player;
-        //enemyLogic.gameManager = this;
-        //// 스폰 지점에 따라 적의 속도와 회전을 설정
-        //if (enemyPoint == 5 || enemyPoint == 6)
-        //{
-        //    enemy.transform.Rotate(Vector3.forward * 45);
-        //    rigid.velocity = new Vector2(enemyLogic.speed, -1);
-        //}
-        //else if (enemyPoint == 7 || enemyPoint == 8)
-        //{
-        //    enemy.transform.Rotate(Vector3.back * 45);
-        //    rigid.velocity = new Vector2(enemyLogic.speed * (-1), -1);
-        //}
-        //else
-        //{
-        //    rigid.velocity = new Vector2(0, enemyLogic.speed * (-1));
-        //}
+        enemyLogic.player = player;
+
+        // 스폰 지점에 따라 적의 속도와 회전을 설정
+        if (enemyPoint == 5 || enemyPoint == 6)
+        {
+            enemy.transform.Rotate(Vector3.forward * 45);
+            rigid.velocity = new Vector2(enemyLogic.moveSpeed, -1);
+        }
+        else if (enemyPoint == 7 || enemyPoint == 8)
+        {
+            enemy.transform.Rotate(Vector3.back * 45);
+            rigid.velocity = new Vector2(enemyLogic.moveSpeed * (-1), -1);
+        }
+        else
+        {
+            rigid.velocity = new Vector2(0, enemyLogic.moveSpeed * (-1));
+        }
 
         // 다음 스폰 항목으로 이동
         spawnIndex++;

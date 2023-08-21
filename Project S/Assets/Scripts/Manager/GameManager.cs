@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 
     public StageManager stageManager;
     public UpgradeController upgradeController;
+    public SpawnManager spawnManager;
+
 
     private void Awake()
     {

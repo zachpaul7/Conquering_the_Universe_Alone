@@ -6,10 +6,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int hp = 999;
-    public int dmg = 1;
-    public float moveSpeed = 1f;
-    public string eName;
+    public AllStats EnemyData;
+
+    public int hp;
+    public int dmg;
+    public float moveSpeed;
+    public string Name;
+    public GameObject player;
+
     SpriteRenderer spriter;
     Rigidbody2D rgb2d;
     Collider2D coll;
@@ -21,6 +25,12 @@ public class Enemy : MonoBehaviour
         rgb2d = GetComponent<Rigidbody2D>();
         spriter = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+
+        moveSpeed = EnemyData.speed;
+        hp = EnemyData.health;
+        Name = EnemyData.objectName;
+
+        rgb2d.velocity = Vector2.down * moveSpeed;
     }
 
     public void TakeDamage(int dmg)
@@ -30,10 +40,14 @@ public class Enemy : MonoBehaviour
         if (hp > 0)
         {
             StartCoroutine("HitEffect");
+            if (Name == "Dreadnought")
+            {
+                GameManager.instance.stageManager.GoNextStoryAct("Story_Act 1");
+            }
         }
         else
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
@@ -48,11 +62,11 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "BorderBullet")
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
             transform.rotation = Quaternion.identity;
-            if (eName == "L")
+            if (Name == "End")
             {
-                GameManager.instance.stageManager.StageEnd();
+                GameManager.instance.spawnManager.StageEnd();
             }
         }
     }

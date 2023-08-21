@@ -41,6 +41,9 @@ public class ObjectManager : MonoBehaviour
     [SerializeField] private GameObject enemy_Dreadnought_Prefab;
     GameObject[] enemy_Dreadnought;
 
+    [SerializeField] private GameObject enemy_End_Prefab;
+    GameObject[] enemy_End;
+
     GameObject[] targetPool;
 
     private void Awake()
@@ -59,6 +62,7 @@ public class ObjectManager : MonoBehaviour
         enemy_Frigate = new GameObject[5];
         enemy_BattleCrusier = new GameObject[3];
         enemy_Dreadnought = new GameObject[1];
+        enemy_End = new GameObject[1];
 
         Generater();
     }
@@ -120,6 +124,11 @@ public class ObjectManager : MonoBehaviour
             enemy_Dreadnought[index] = Instantiate(enemy_Dreadnought_Prefab, transform);
             enemy_Dreadnought[index].SetActive(false);
         }
+        for (int index = 0; index < enemy_End.Length; index++)
+        {
+            enemy_End[index] = Instantiate(enemy_End_Prefab, transform);
+            enemy_End[index].SetActive(false);
+        }
     }
 
     public GameObject MakeObj(string type)
@@ -164,6 +173,9 @@ public class ObjectManager : MonoBehaviour
 
             case "5":
                 targetPool = enemy_Dreadnought;
+                break;
+            case "6":
+                targetPool = enemy_End;
                 break;
         }
 

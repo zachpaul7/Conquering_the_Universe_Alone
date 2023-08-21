@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    [SerializeField] private Vector2 inputVec;
+    [SerializeField] public float speed;
+    [SerializeField] public Vector2 inputVec;
 
     Rigidbody2D rigid;
     Animator anim;
@@ -65,6 +65,11 @@ public class PlayerMove : MonoBehaviour
                     isTouchBottom = true;
                     break;
             }
+        }
+        else if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")
+        {
+            GameManager.instance.stageManager.RespawnPlayer();
+            gameObject.SetActive(false);
         }
     }
 

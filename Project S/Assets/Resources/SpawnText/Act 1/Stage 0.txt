@@ -1,5 +1,2 @@
-Scout,1,2
-Bomber,0,2
-Frigate,2,2
 Scout,0,2
-Dreadnought,2,2
+End,9,2

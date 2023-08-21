@@ -2,56 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour
 {
-    public int stage;
     public Transform playerPos;
 
     public GameObject player;
     //public GameObject gameOverSet;
-    [SerializeField]
-    UpgradePanelManager upgradePanelManager;
+
 
 
     void Awake()
     {
-        StageStart();
+
     }
     
     void Update()
     {
 
     }
-    public void StageStart()
+    
+    
+    IEnumerator LoadSceneCoroutine(string sceneName)
     {
-
-       // ReadSpawnFile();
-    }
-    public void StageEnd()
-    {
-        // Player Repos
-        player.transform.position = playerPos.position;
-        // 스테이지 증가
-        stage++;
-        if (stage > 3)
-        {
-            Invoke("GameOver", 2);
-        }
-        else
-        {
-            if (GameManager.instance.upgradeController.selectedUpgrades == null)
-            {
-                GameManager.instance.upgradeController.selectedUpgrades = new List<UpgradeData>();
-            }
-            GameManager.instance.upgradeController.selectedUpgrades.Clear();
-            GameManager.instance.upgradeController.selectedUpgrades.AddRange(GameManager.instance.upgradeController.GetUpgrades(3));
-
-            upgradePanelManager.OpenPanel(GameManager.instance.upgradeController.selectedUpgrades);
-            Invoke("StageStart", 2);
-        }
+        yield return new WaitForSeconds(4f);
+        SceneManager.LoadScene(sceneName);
     }
 
+    public void GoNextStoryAct(string sceneName)
+    {
+        StartCoroutine(LoadSceneCoroutine(sceneName));
+    }
+
+    public void GoNextAct()
+    {
+        
+    }
     public void Upgrade(int selectedUpgradeId)
     {
         UpgradeData upgradeData = GameManager.instance.upgradeController.selectedUpgrades[selectedUpgradeId];
