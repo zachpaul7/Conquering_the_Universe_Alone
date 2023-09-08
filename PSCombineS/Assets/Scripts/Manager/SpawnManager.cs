@@ -20,13 +20,14 @@ public class SpawnManager : MonoBehaviour
     public bool spawnEnd;
 
     public int stage;
-    [SerializeField] private UpgradePanelManager upgradePanelManager;
+    public UpgradePanelManager upgradePanelManager;
 
     void Awake()
     {
         // 스폰 리스트와 적 오브젝트 배열 초기화
         spawnList = new List<Spawn>();
         StageStart();
+        upgradePanelManager = GameObject.Find("---UpgradeController---").GetComponent<UpgradePanelManager>();
     }
 
     void Update()
@@ -40,6 +41,15 @@ public class SpawnManager : MonoBehaviour
             SpawnEnemy();
             curSpawnDelay = 0;
         }
+    }
+    void CheckCompont()
+    {
+        if (upgradePanelManager == null)
+        {
+            upgradePanelManager = GameObject.Find("---UpgradeController---").GetComponent<UpgradePanelManager>();
+        }
+
+        
     }
     void StageStart()
     {
