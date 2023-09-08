@@ -22,7 +22,7 @@ Unity 엔진을 기반으로 제작된 2D 종스크롤 슈팅 게임
 
 ## 협업한 팀원
 - 팀장 : 박신영 - zachpaul707@gmail.com
-- 팀원 : 김성우 - 
+- 팀원 : 김성우 - tjddnwkdiy@gmail.com
 - 팀원 : 박세훈 - 
 
 ## 사용한 에셋
