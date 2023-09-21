@@ -1,0 +1,2 @@
+Scout,1,2
+Dreadnought,2,2
