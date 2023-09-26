@@ -596,7 +596,7 @@ MonoBehaviour:
   enemy_End_Prefab: {fileID: 8534390801825891641, guid: 538394daedcd8904bb3a287feebb7237, type: 3}
   bullet_Enemy_Normal_Prefab: {fileID: 4816924246151345903, guid: d5a734d4c409bc94da25de5ec910a774, type: 3}
   bullet_Enemy_Special_Prefab: {fileID: 2333270594053235822, guid: 6c982b5b832775d4ea875b149bfde1a1, type: 3}
-  bullet_Enemy_Rocket_Prefab: {fileID: 79403371622884605, guid: fc598d74de4ed6e48ade3d6342ddd1b0, type: 3}
+  bullet_Enemy_Rocket_Prefab: {fileID: 991314545234407310, guid: 6db31c9c9700a9040a53327d57ac5880, type: 3}
   bullet_Enemy_Three_Prefab: {fileID: 6847704597194455119, guid: a8a59ef848ea8a3449341894007ffe61, type: 3}
 --- !u!4 &87542553
 Transform:
@@ -14710,7 +14710,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2147111174
 Transform:
   m_ObjectHideFlags: 0
