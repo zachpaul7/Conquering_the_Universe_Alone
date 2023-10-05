@@ -1,33 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BFGWeapon : MonoBehaviour
 {
     [SerializeField] private GameObject objBFG;
 
     [SerializeField] private float coolingTime = 25.0f;
-
+    [SerializeField] private GameObject wpContainer;
+    [SerializeField] private Button wpBtn;
     bool isDelay;
 
-    void Update()
+    void Awake()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        wpContainer = GameObject.Find("---GameManager---").transform.GetChild(2).transform.GetChild(1).gameObject;
+        wpBtn = wpContainer.transform.Find(GameManager.instance.upgradeController.FindWeaponIndex("Canon").ToString()).GetComponentInChildren<Button>();
+
+        wpBtn.onClick.AddListener(Fire);
+    }
+    void Fire()
+    {
+        if (isDelay == false)
         {
-            if (isDelay == false)
-            {
-                isDelay = true;
+            isDelay = true;
 
-                objBFG.SetActive(true);
+            objBFG.SetActive(true);
 
-                StartCoroutine(FireBFGCoroutine());
+            StartCoroutine(FireBFGCoroutine());
 
-                StartCoroutine(CoolTime());
-            }
-            else
-            {
-                Debug.Log("충전중");
-            }
+            StartCoroutine(CoolTime());
+        }
+        else
+        {
+            Debug.Log("충전중");
         }
     }
 

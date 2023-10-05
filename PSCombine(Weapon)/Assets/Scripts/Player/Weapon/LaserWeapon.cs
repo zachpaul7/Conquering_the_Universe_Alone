@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LaserWeapon : MonoBehaviour
 {
@@ -13,31 +14,36 @@ public class LaserWeapon : MonoBehaviour
     [SerializeField] private float coolingTime = 25.0f;
     [SerializeField] private float shootingTime = 2.0f;
 
+    [SerializeField] private GameObject wpContainer;
+    [SerializeField] private Button wpBtn;
+
     Animator anim;
     bool isDelay;
 
-    void Start()
+    void Awake()
     {
+        wpContainer = GameObject.Find("---GameManager---").transform.GetChild(2).transform.GetChild(1).gameObject;
+        wpBtn = wpContainer.transform.Find(GameManager.instance.upgradeController.FindWeaponIndex("Razer").ToString()).GetComponentInChildren<Button>();
+
         anim = GetComponent<Animator>();
+
+        wpBtn.onClick.AddListener(Fire);
     }
 
-    void Update()
+    void Fire()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (isDelay == false)
         {
-            if (isDelay == false)
-            {
-                isDelay = true;
-                anim.SetTrigger("Fire");
+            isDelay = true;
+            anim.SetTrigger("Fire");
 
-                StartCoroutine(SpawnLaserDelayed(0.5f));
-                StartCoroutine(ShootingLaserDelayed());
-                StartCoroutine(CoolTime());
-            }
-            else
-            {
-                Debug.Log("충전중");
-            }
+            StartCoroutine(SpawnLaserDelayed(0.5f));
+            StartCoroutine(ShootingLaserDelayed());
+            StartCoroutine(CoolTime());
+        }
+        else
+        {
+            Debug.Log("충전중");
         }
     }
 

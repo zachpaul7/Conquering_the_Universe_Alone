@@ -19,9 +19,8 @@ public class RocketWeapon : MonoBehaviour
 
     void Awake()
     {
-        wpContainer = GameObject.Find("---GameManager---").transform.GetChild(1).transform.GetChild(1).gameObject;
-        Debug.Log(wpContainer);
-        wpBtn = wpContainer.transform.Find(GameManager.instance.upm.btnNum.ToString()).GetComponentInChildren<Button>();
+        wpContainer = GameObject.Find("---GameManager---").transform.GetChild(2).transform.GetChild(1).gameObject;
+        wpBtn = wpContainer.transform.Find(GameManager.instance.upgradeController.FindWeaponIndex("Rocket").ToString()).GetComponentInChildren<Button>();
 
         anim = GetComponent<Animator>();
         wfs1 = new WaitForSeconds(0.16f);

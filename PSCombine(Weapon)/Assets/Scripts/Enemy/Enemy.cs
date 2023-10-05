@@ -427,7 +427,6 @@ public class Enemy : MonoBehaviour
 
     public void DestroyEndAnimation()
     {
-        Debug.Log("DEAD");
         gameObject.SetActive(false);
 
         if (eName == "5")

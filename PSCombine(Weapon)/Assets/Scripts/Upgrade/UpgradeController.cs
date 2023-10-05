@@ -7,8 +7,11 @@ public class UpgradeController : MonoBehaviour
 {
     public GameObject player;
     public List<UpgradeData> upgrades;
+
     private Dictionary<string, bool> weaponUnlockStatus;
 
+    [HideInInspector]
+    public List<string> unlockedWeapons;
     [HideInInspector]
     public List<UpgradeData> selectedUpgrades;
     [SerializeField]
@@ -18,11 +21,7 @@ public class UpgradeController : MonoBehaviour
 
     [SerializeField] GameObject rocket;
     [SerializeField] GameObject razer;
-    [SerializeField] GameObject canon;
-
-    public bool isRocket;
-    private bool isCanon = false;
-    private bool isRazer = false;
+    [SerializeField] GameObject bfg;
 
     private void Awake()
     {
@@ -32,10 +31,6 @@ public class UpgradeController : MonoBehaviour
             { "Boom", false },
             { "Rocket", false },
         };
-
-        isRocket = false;
-        isCanon = false;
-        isRazer = false;
     }
 
     private void FixedUpdate()
@@ -53,17 +48,35 @@ public class UpgradeController : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    // UpgradeController.cs
-
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         int buildIndex = scene.buildIndex;
 
-        if ((buildIndex == 2 || buildIndex == 4 || buildIndex == 6) && GameManager.instance.isRocketUnlocked)
+        if ((buildIndex == 2 || buildIndex == 4 || buildIndex == 6) && GameManager.instance.isRocketUnlocked == true)
         {
             UnlockRocket();
-            GameManager.instance.isRocketUnlocked = false; // 호출되었음을 표시
         }
+        if ((buildIndex == 2 || buildIndex == 4 || buildIndex == 6) && GameManager.instance.isBFGUnlocked == true)
+        {
+            UnlockBFG();
+        }
+        if ((buildIndex == 2 || buildIndex == 4 || buildIndex == 6) && GameManager.instance.isCanonUnlocked == true)
+        {
+            UnlockRazer();
+        }
+    }
+
+    public int FindWeaponIndex(string weaponName)
+    {
+        for(int i = 0; i < unlockedWeapons.Count; i++)
+        {
+            if(unlockedWeapons[i] == weaponName)
+            {
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     public List<UpgradeData> GetUpgrades(int count)
@@ -101,8 +114,6 @@ public class UpgradeController : MonoBehaviour
 
     public void ApplyUpgrade(UpgradeData upgradeData)
     {
-        Debug.Log("Entering ApplyUpgrade function");
-
         if (acquiredUpgrades == null)
         {
             acquiredUpgrades = new List<UpgradeData>();
@@ -129,15 +140,19 @@ public class UpgradeController : MonoBehaviour
                 switch (upgradeData.Name)
                 {
                     case "Raser":
-
-                        Debug.Log("Entered Weapon Upgrade case for Raser");
+                        unlockedWeapons.Add("Razer");
+                        UnlockRazer();
+                        
                         break;
                     case "Canon":
-                        Debug.Log("Entered Weapon Upgrade case for Canon");
+                        unlockedWeapons.Add("Canon");
+                        UnlockBFG();
+                        
                         break;
                     case "Rocket":
-                        Debug.Log("Entered Weapon Upgrade case for Rocket");
+                        unlockedWeapons.Add("Rocket");
                         UnlockRocket();
+                        
                         break;
                 }
                 break;
@@ -156,6 +171,7 @@ public class UpgradeController : MonoBehaviour
                 break;
         }
     }
+
     private void UnlockRocket()
     {
         rocket = GameObject.Find("Main Ship").transform.GetChild(0).transform.GetChild(1).gameObject;
@@ -164,6 +180,29 @@ public class UpgradeController : MonoBehaviour
         {
             rocket.SetActive(true);
         }
+        GameManager.instance.isRocketUnlocked = true;
+    }
+
+    private void UnlockBFG()
+    {
+        bfg = GameObject.Find("Main Ship").transform.GetChild(0).transform.GetChild(2).gameObject;
+
+        if (bfg.activeSelf == false)
+        {
+            bfg.SetActive(true);
+        }
+        GameManager.instance.isBFGUnlocked = true;
+    }
+
+    private void UnlockRazer()
+    {
+        razer = GameObject.Find("Main Ship").transform.GetChild(0).transform.GetChild(3).gameObject;
+
+        if (razer.activeSelf == false)
+        {
+            razer.SetActive(true);
+        }
+        GameManager.instance.isCanonUnlocked = true;
     }
 
     private void UpgradeRazer()

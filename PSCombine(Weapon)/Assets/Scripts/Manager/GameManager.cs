@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public ObjectManager objectManager;
     public UpgradePanelManager upm;
     public PlayerHealth playerHealth;
+    public SoundManager soundManager;
 
     [HideInInspector] public int playerMaxHealth;
     [HideInInspector] public int life;
@@ -34,6 +35,8 @@ public class GameManager : MonoBehaviour
     public GameObject canvas;
 
     public bool isRocketUnlocked = false;
+    public bool isBFGUnlocked = false;
+    public bool isCanonUnlocked = false;
 
     private void Awake()
     {
@@ -57,6 +60,7 @@ public class GameManager : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+
         if(SceneManager.GetActiveScene().buildIndex==2 || SceneManager.GetActiveScene().buildIndex == 4 || SceneManager.GetActiveScene().buildIndex == 6)
         {
             canvas = GameObject.Find("Canvas");
@@ -64,22 +68,21 @@ public class GameManager : MonoBehaviour
             player = GameObject.Find("Main Ship");
             spawnManager = GameObject.Find("---SpawnManager---").GetComponent<SpawnManager>();
             playerMove = player.GetComponent<PlayerMove>();
-            upgradeController = GameObject.Find("---UpgradeController---").GetComponent<UpgradeController>();
             objectManager = GameObject.Find("---ObjectManager---").GetComponent<ObjectManager>();
             stageManager = GameObject.Find("---StageManager---").GetComponent<StageManager>();
             playerHealth = player.GetComponent<PlayerHealth>();
+            
         }
+
         if (SceneManager.GetActiveScene().buildIndex == 3 || SceneManager.GetActiveScene().buildIndex == 5 || SceneManager.GetActiveScene().buildIndex == 7 || SceneManager.GetActiveScene().buildIndex == 8)
         {
             player = null;
             spawnManager = null;
             playerMove = null;
-            upgradeController = null;
             objectManager = null;
             stageManager = null;
             playerHealth = null;
         }
-
 
         actNum = 1; // actNum √ ±‚»≠
         playerPower = 1;
@@ -88,23 +91,12 @@ public class GameManager : MonoBehaviour
         player = GameObject.Find("Main Ship");
         spawnManager = GameObject.Find("---SpawnManager---").GetComponent<SpawnManager>();
         playerMove = player.GetComponent<PlayerMove>();
-        upgradeController = GameObject.Find("---UpgradeController---").GetComponent<UpgradeController>();
         objectManager = GameObject.Find("---ObjectManager---").GetComponent<ObjectManager>();
         stageManager = GameObject.Find("---StageManager---").GetComponent<StageManager>();
         playerHealth = player.GetComponent<PlayerHealth>();
         
     }
-    
-    public void UpdateLifeIcon(int life)
-    {
-        for (int index = 0; index < 5; index++) {
-            lifeImages[index].color = new Color(1, 1, 1, 0);
-        }
-        for (int index = 0; index < life; index++)
-        {
-            lifeImages[index].color = new Color(1, 1, 1, 1);
-        }
-    }
+
 
     private void Update()
     {
@@ -120,8 +112,18 @@ public class GameManager : MonoBehaviour
         {
             canvas.SetActive(false);
         }
-        
+    }
 
+    public void UpdateLifeIcon(int life)
+    {
+        for (int index = 0; index < 5; index++)
+        {
+            lifeImages[index].color = new Color(1, 1, 1, 0);
+        }
+        for (int index = 0; index < life; index++)
+        {
+            lifeImages[index].color = new Color(1, 1, 1, 1);
+        }
     }
 
     void CheckCompont()
@@ -144,10 +146,6 @@ public class GameManager : MonoBehaviour
             {
                 playerHealth = player.GetComponent<PlayerHealth>();
             }
-            if (upgradeController == null)
-            {
-                upgradeController = GameObject.Find("---UpgradeController---").GetComponent<UpgradeController>();
-            }
             if (objectManager == null)
             {
                 objectManager = GameObject.Find("---ObjectManager---").GetComponent<ObjectManager>();
@@ -163,18 +161,14 @@ public class GameManager : MonoBehaviour
             player = null;
             spawnManager = null;
             playerMove = null;
-            upgradeController = null;
             objectManager = null;
             stageManager = null;
             playerHealth = null;
         }
-
-
     }
 
     public void ActControl()
     {
-        Debug.Log("Act");
         actNum++;
         StartCoroutine(SceneChange());
     }
@@ -184,10 +178,9 @@ public class GameManager : MonoBehaviour
         yield return YieldCache.WaitForSeconds(3f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
-        isRocketUnlocked = true;
-
         stage = 0;
-        GameManager.instance.playerHealth.isStage = false;
+        if (player != null)
+            GameManager.instance.playerHealth.isStage = false;
 
     }
     public IEnumerator GameOver()

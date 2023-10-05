@@ -12,6 +12,7 @@ public class UpgradePanelManager : MonoBehaviour
     [SerializeField] private List<UpgradeButton> upgradeButtons;
     [SerializeField] private List<WeaponButton> wpButtons;
 
+
     PauseManager pauseManager;
 
     private int selectedOptionIndex = 0;
@@ -118,9 +119,6 @@ public class UpgradePanelManager : MonoBehaviour
     {
         for (int i = 0; i < wpButtons.Count; i++)
         {
-            btnNum = i;
-
-            Debug.Log("button:" + btnNum);
             if (!wpButtons[i].gameObject.activeInHierarchy)
             {
                 return i;
@@ -129,6 +127,8 @@ public class UpgradePanelManager : MonoBehaviour
 
         return -1; // Return -1 if no available weapon button index is found
     }
+
+    
 
     public void ClosePanel()
     {
