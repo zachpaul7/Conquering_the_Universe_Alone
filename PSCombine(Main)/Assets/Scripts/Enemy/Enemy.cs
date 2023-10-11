@@ -91,7 +91,7 @@ public class Enemy : MonoBehaviour
     IEnumerator TorpedoShipMove()
     {
         rgb2d.velocity = Vector2.down * speed;
-        yield return YieldCache.WaitForSeconds(1.5f);
+        yield return YieldCache.WaitForSeconds(3f);
 
         rgb2d.velocity = Vector2.zero;
 
@@ -113,7 +113,62 @@ public class Enemy : MonoBehaviour
         rgb2d.velocity = Vector2.up * speed;
     }
 
+    public void TorpedoFire()
+    {
+        StartCoroutine(TorpedoFireCoroutine());
+    }
+
+    IEnumerator TorpedoFireCoroutine()
+    {
+        yield return YieldCache.WaitForSeconds(0.2f);
+
+        for (int i = 0; i < 6; i++)
+        {
+            yield return YieldCache.WaitForSeconds(0.17f);
+
+            Vector3 rocketPosition = transform.position;
+
+            // 로켓 위치
+            switch (i)
+            {
+                case 0:
+                    rocketPosition += Vector3.left * 0.177f + Vector3.down * 0.2f;
+                    break;
+                case 1:
+                    rocketPosition += Vector3.right * 0.177f + Vector3.down * 0.2f;
+                    break;
+                case 2:
+                    rocketPosition += Vector3.left * 0.3f + Vector3.down * 0.2f;
+                    break;
+                case 3:
+                    rocketPosition += Vector3.right * 0.3f + Vector3.down * 0.2f;
+                    break;
+                case 4:
+                    rocketPosition += Vector3.left * 0.427f + Vector3.down * 0.2f;
+                    break;
+                case 5:
+                    rocketPosition += Vector3.right * 0.427f + Vector3.down * 0.2f;
+                    break;
+            }
+
+            // 로켓 생성
+            GameObject t = GameManager.instance.objectManager.MakeObj("Bullet_Enemy_Rocket");
+            t.transform.position = rocketPosition;
+
+            // 각 로켓의 rigidbody 가져오기
+            Rigidbody2D rigidt = t.GetComponent<Rigidbody2D>();
+
+            // 발사
+            rigidt.AddForce(Vector2.down * 5, ForceMode2D.Impulse);
+        }
+    }
+
     IEnumerator FrigateMove()
+    {
+        yield return null;
+    }
+
+    IEnumerator ElitetMove()
     {
         if (spawnType == 0)
         {
@@ -124,6 +179,7 @@ public class Enemy : MonoBehaviour
             yield return YieldCache.WaitForSeconds(1f);
 
             fA = "Bullet_Enemy_Special";
+
             FireAround();
             Debug.Log(maxPatternCount[patternIndex]);
 
@@ -133,12 +189,6 @@ public class Enemy : MonoBehaviour
             rgb2d.velocity = Vector2.up * (speed * 0.75f);
             yield return YieldCache.WaitForSeconds(4f);
         }
-
-    }
-
-    IEnumerator ElitetMove()
-    {
-        yield return null;
     }
 
     IEnumerator BossMove()
@@ -175,6 +225,15 @@ public class Enemy : MonoBehaviour
             isDead = true;
             rgb2d.velocity = Vector3.zero;
             coll.enabled = false;
+
+            if (eName == "5")
+            {
+                GameManager.instance.sm.PlaySFX("Explosion_Boss");
+            }
+            else
+            {
+                GameManager.instance.sm.PlaySFX("Explosion");
+            }
 
             animator.SetTrigger("Dead");
         }
@@ -324,8 +383,8 @@ public class Enemy : MonoBehaviour
 
     void FireAround()
     {
-        int roundNumA = 50;
-        int roundNumB = 40;
+        int roundNumA = 40;
+        int roundNumB = 50;
         int roundNum = curPatternCount % 2 == 0 ? roundNumA : roundNumB;
 
         for (int index = 0; index < roundNum; index++)
@@ -365,7 +424,6 @@ public class Enemy : MonoBehaviour
             Fire(); // 발사 메서드 호출로 총알을 생성하고 발사합니다.
             yield return new WaitForSeconds(fireRate); // 다음 발사까지 대기합니다.
         }
-
     }
 
     IEnumerator HitEffect()
@@ -384,5 +442,8 @@ public class Enemy : MonoBehaviour
         {
             GameManager.instance.ActControl();
         }
+
+        coll.enabled = true;
+        isDead = false;
     }
 }

@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public SpawnManager spawnManager;
     public ObjectManager objectManager;
     public UpgradePanelManager upm;
+    public SoundManager sm;
+
     [HideInInspector]public int playerMaxHealth;
     public int actNum;
     public bool isWork;
@@ -23,18 +25,15 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        if (SceneManager.GetActiveScene().buildIndex == 7)
+        {
+            Destroy(this.gameObject);
+        }
 
         if (instance == null)
         {
-            if (SceneManager.GetActiveScene().buildIndex == 7)
-            {
-                Destroy(this.gameObject);
-            }
-            else
-            {
-                instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
+            instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -63,7 +62,6 @@ public class GameManager : MonoBehaviour
             stageManager = null;
         }
 
-
         actNum = 1; // actNum √ ±‚»≠
         playerPower = 1;
         isWork = false;
@@ -79,9 +77,6 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         CheckCompont();
-
-        //Debug.Log(playerMaxHealth);
-
     }
 
     void CheckCompont()
@@ -122,8 +117,6 @@ public class GameManager : MonoBehaviour
             objectManager = null;
             stageManager = null;
         }
-
-
     }
 
     public void ActControl()
