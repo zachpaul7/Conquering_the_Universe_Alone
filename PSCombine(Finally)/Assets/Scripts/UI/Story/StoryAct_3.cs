@@ -15,7 +15,6 @@ public class StoryAct_3 : MonoBehaviour
 
     private bool isActive_s1 = true;
     private bool isActive_s2 = true;
-    private bool isActive_s3 = true;
 
     private void Start()
     {
@@ -36,26 +35,15 @@ public class StoryAct_3 : MonoBehaviour
     {
         if (!isActive_s1)
         {
-            scene[0].SetActive(false);
-            scene[1].SetActive(true);
-            dialog.SetActive(true);
+            scene[1].SetActive(false);
+            scene[2].SetActive(true);
             isActive_s1 = true;
 
             StartCoroutine(Take2());
             StopCoroutine(Take2());
         }
+        
         else if (!isActive_s2)
-        {
-            scene[1].SetActive(false);
-            scene[2].SetActive(true);
-            dialog.SetActive(true);
-            isActive_s2 = true;
-
-            StartCoroutine(Take3());
-            StopCoroutine(Take3());
-
-        }
-        else if (!isActive_s3)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
@@ -64,16 +52,13 @@ public class StoryAct_3 : MonoBehaviour
 
     IEnumerator Take1()
     {
-        string[] strings = new string[5]{ "1 . . . . . . .?",
-                                          "1 . . . . . . . . . .!",
-                                          "1 . . . . . . . . . . .@",
-                                          "1 . . . . . . . . . .#",
-                                          "1 . . . . . . . . . . .$"};
+        string[] strings = new string[4]{ "수고했네, 이제 다 끝난것 같군.",
+                                          "삐용 삐용",
+                                          "!!!!",
+                                          "무슨 일이지??"};
 
         foreach (Text t in textBox)
             t.text = "";
-
-        yield return YieldCache.WaitForSeconds(2f);
 
         dialog.SetActive(true);
         skipBtn.SetActive(true);
@@ -89,8 +74,16 @@ public class StoryAct_3 : MonoBehaviour
             }
 
             yield return YieldCache.WaitForSeconds(1.5f);
+
+            switch (t)
+            {
+                case 0:
+                    scene[0].SetActive(false);
+                    scene[1].SetActive(true);
+                    break;
+            }
         }
-        dialog.SetActive(false);
+
         yield return YieldCache.WaitForSeconds(2f);
 
         isActive_s1 = false;
@@ -98,10 +91,11 @@ public class StoryAct_3 : MonoBehaviour
 
     IEnumerator Take2()
     {
-        string[] strings = new string[4]{ "2 . . . . . . . . . . . . . .%",
-                                          "2 . . . . . . . . . . . . .^",
-                                          "2 . . . . . . . . . . .&",
-                                          "2 . . . . . . . . . .*"};
+        string[] strings = new string[5]{ "키킥, 이정도로 끝날거라고 생각했나?",
+                                          "누구냐!!!",
+                                          "너희의 전투력 분석이 끝났다. 키키킥",
+                                          "!!!!!!!!!!",
+                                          "자! 이제 최후의 대결을 시작해 보자고 키킥"};
 
         foreach (Text t in textBox)
             t.text = "";
@@ -118,40 +112,33 @@ public class StoryAct_3 : MonoBehaviour
             }
 
             yield return YieldCache.WaitForSeconds(1.5f);
+
+            switch (t)
+            {
+                case 0:
+                    scene[2].SetActive(false);
+                    scene[3].SetActive(true);
+                    break;
+                case 1:
+                    scene[3].SetActive(false);
+                    scene[4].SetActive(true);
+                    break;
+                case 2:
+                    scene[4].SetActive(false);
+                    scene[5].SetActive(true);
+                    break;
+                case 3:
+                    scene[5].SetActive(false);
+                    scene[4].SetActive(true);
+                    break;
+            }
         }
-        dialog.SetActive(false);
+        
         yield return YieldCache.WaitForSeconds(2f);
 
         isActive_s2 = false;
     }
 
-    IEnumerator Take3()
-    {
-        string[] strings = new string[3]{ "3 . . . . . . .(",
-                                          "3 . . . . . . . . . .)",
-                                          "3 . . . . . . . . . . .+="};
-
-        foreach (Text t in textBox)
-            t.text = "";
-
-
-        for (int t = 0; t < textBox.Length && t < strings.Length; t++)
-        {
-            int strTypingLength = strings[t].GetTypingLength();
-
-            for (int i = 0; i <= strTypingLength; i++)
-            {
-                textBox[t].text = strings[t].Typing(i);
-                yield return YieldCache.WaitForSeconds(0.05f);
-            }
-
-            yield return YieldCache.WaitForSeconds(1.5f);
-        }
-
-        yield return YieldCache.WaitForSeconds(4f);
-
-        isActive_s3 = false;
-    }
 
     public void SkipButton()
     {
