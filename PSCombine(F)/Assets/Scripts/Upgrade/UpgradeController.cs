@@ -177,7 +177,13 @@ public class UpgradeController : MonoBehaviour
     }
     private void BaseUpgrade()
     {
+<<<<<<< HEAD
+        int basedmg = GameManager.instance.damageManager.baseDmg;
+        basedmg *= 2;
+        GameManager.instance.damageManager.baseDmg = basedmg;
+=======
         GameManager.instance.damageManager.baseDmg = 20;
+>>>>>>> 05be0f535b0b0705848bdca7f90a3c8d26ca40a9
     }
     private void UnlockRocket()
     {
@@ -191,7 +197,13 @@ public class UpgradeController : MonoBehaviour
     }
     private void UpgradeRocket()
     {
+<<<<<<< HEAD
+        int rocketdmg = GameManager.instance.damageManager.rocketDmg;
+        rocketdmg *= 2;
+        GameManager.instance.damageManager.rocketDmg = rocketdmg;
+=======
         GameManager.instance.damageManager.rocketDmg = 30;
+>>>>>>> 05be0f535b0b0705848bdca7f90a3c8d26ca40a9
     }
 
     private void UnlockBFG()
@@ -206,7 +218,13 @@ public class UpgradeController : MonoBehaviour
     }
     private void UpgradeBFG()
     {
+<<<<<<< HEAD
+        int bfdmg = GameManager.instance.damageManager.bfgDmg;
+        bfdmg *= 2;
+        GameManager.instance.damageManager.bfgDmg = bfdmg;
+=======
         GameManager.instance.damageManager.bfgDmg = 600;
+>>>>>>> 05be0f535b0b0705848bdca7f90a3c8d26ca40a9
       
     }
 
