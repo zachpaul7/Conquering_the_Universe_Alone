@@ -6,7 +6,7 @@ Unity 엔진을 기반으로 제작된 슈팅 아케이드 + 로그라이크 형
 
 ## 📢 프로젝트 개요
 ### ⌛ 개발 기간
-* 23.7 ~ 23. 11 (총 15주)
+* 23.7 ~ 23. 11 (총 13주)
 
 ### ⚙ 개발 환경
 - Language : C#
@@ -24,6 +24,7 @@ Unity 엔진을 기반으로 제작된 슈팅 아케이드 + 로그라이크 형
 |![image01](https://github.com/zachpaul7/Conquering_the_Universe_Alone/assets/60610390/9d915fd8-c8a7-411c-bb7c-11a00e61b1d7)|![image02](https://github.com/zachpaul7/Conquering_the_Universe_Alone/assets/60610390/2cbcafc3-5b08-43e3-a40a-be60fa6f1257)|
 |------|---|
 | 1945 | 뱀파이어서바이벌 |
+<br/>
 
 ### 게임 플레이
 - 조작 및 인게임 설명
@@ -31,22 +32,27 @@ Unity 엔진을 기반으로 제작된 슈팅 아케이드 + 로그라이크 형
 |메인 화면|기본 화면|업그레이드|무기 사용|
 |---|---|---|---|
 |![그림2](https://github.com/zachpaul7/Conquering_the_Universe_Alone/assets/60610390/98b8a14b-ec86-4c5a-826a-6ad0121d83b8)|![그림323](https://github.com/zachpaul7/Conquering_the_Universe_Alone/assets/60610390/39f5bf65-3599-450c-96fe-91852fd2fdd3)|![123123](https://github.com/zachpaul7/Conquering_the_Universe_Alone/assets/60610390/16e03681-4751-42a4-99b8-d951ea11e1a1)|![그림1](https://github.com/zachpaul7/Conquering_the_Universe_Alone/assets/60610390/461387c0-53dd-4832-b536-8dea2e8b91a1)|
+<br/>
 
 - 스테이지
 
+각 스테이지별로 다른 유형의 적들과 보스들이 존재한다.
+
 |Act 1|Act 2|Act 3|스토리|
 |---|---|---|---|
-|이동방향|상(위)|좌(왼쪽)|하(아래)|
-
+|![1s1](https://github.com/zachpaul7/Conquering_the_Universe_Alone/assets/60610390/39180454-15fa-431b-b616-351c24cef7d1)|![2s2](https://github.com/zachpaul7/Conquering_the_Universe_Alone/assets/60610390/2cc241ba-2a34-4cf0-b44c-dd8cc6dd3d24)|![1s](https://github.com/zachpaul7/Conquering_the_Universe_Alone/assets/60610390/fdec7778-de0f-4d6a-88a3-8e017c13c169)|![그림3](https://github.com/zachpaul7/Conquering_the_Universe_Alone/assets/60610390/60095acf-437a-402a-b534-4208f0715418)|
+<br/>
 
 ## 🛒 사용한 에셋
 
 <details>
   <summary>Sprite Assets</summary>
-  github.com/ingu627 로 이동한다.
+  - 블라블라<br>
+  - 블라쏘ㅓㅏㄹㄹ
 </details>
 
 <details>
   <summary>Sound Assets</summary>
-  github.com/ingu627 로 이동한다.
+  - 블라블라<br>
+  - 블라쏘ㅓㅏㄹㄹ
 </details>
