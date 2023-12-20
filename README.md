@@ -18,8 +18,11 @@ Unity 엔진을 기반으로 제작된 슈팅 아케이드 + 로그라이크 형
 
 ## 🎮 게임
 ### 다운로드
-- https://github.com/zachpaul7/Conquering_the_Universe_Alone/releases/tag/releases%2Fv1.2.0
+- [나 혼자 우주정복 다운로드](https://github.com/zachpaul7/Conquering_the_Universe_Alone/releases/tag/releases%2Fv1.2.0)
 
+### 게임 기술서
+- [사용설명서-나 혼자 우주정복.pptx](https://github.com/zachpaul7/Conquering_the_Universe_Alone/files/13721869/-.pptx)
+  
 ### 개발 동기
 - 짧은 시간동안 즐길 수 있는 간단하면서도 재미있는 게임과 도전 욕구를 자극하는 게임이 현재 게임시장의 트랜드라고 생각해 오락실에서 즐겨하던 **슈팅게임(1945)** 과 최근에 유행했던 **로그라이크 게임(뱀파이어서바이벌)** 을 결합해   ‘나 혼자 우주정복’이라는 게임을 모바일 플렛폼으로 개발하게 되었다.
 
@@ -27,6 +30,9 @@ Unity 엔진을 기반으로 제작된 슈팅 아케이드 + 로그라이크 형
 |------|---|
 | 1945 | 뱀파이어서바이벌 |
 <br/>
+
+### 게임 플레이 영상
+- [나 혼자 우주정복 게임플레이 영상](https://github.com/zachpaul7/Conquering_the_Universe_Alone/assets/60610390/81e78a82-a382-4b43-9a63-4b1150a3c9a9)
 
 ### 게임 플레이
 - 조작 및 인게임 설명
@@ -44,10 +50,6 @@ Unity 엔진을 기반으로 제작된 슈팅 아케이드 + 로그라이크 형
 |---|---|---|---|
 |![1s1](https://github.com/zachpaul7/Conquering_the_Universe_Alone/assets/60610390/39180454-15fa-431b-b616-351c24cef7d1)|![2s2](https://github.com/zachpaul7/Conquering_the_Universe_Alone/assets/60610390/2cc241ba-2a34-4cf0-b44c-dd8cc6dd3d24)|![1s](https://github.com/zachpaul7/Conquering_the_Universe_Alone/assets/60610390/fdec7778-de0f-4d6a-88a3-8e017c13c169)|![그림3](https://github.com/zachpaul7/Conquering_the_Universe_Alone/assets/60610390/60095acf-437a-402a-b534-4208f0715418)|
 <br/>
-
-- 게임 플레이 영상
-  - https://github.com/zachpaul7/Conquering_the_Universe_Alone/assets/60610390/81e78a82-a382-4b43-9a63-4b1150a3c9a9
-
 
 ## 🏆 시상
 
