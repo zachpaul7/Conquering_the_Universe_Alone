@@ -45,6 +45,10 @@ Unity 엔진을 기반으로 제작된 슈팅 아케이드 + 로그라이크 형
 |![1s1](https://github.com/zachpaul7/Conquering_the_Universe_Alone/assets/60610390/39180454-15fa-431b-b616-351c24cef7d1)|![2s2](https://github.com/zachpaul7/Conquering_the_Universe_Alone/assets/60610390/2cc241ba-2a34-4cf0-b44c-dd8cc6dd3d24)|![1s](https://github.com/zachpaul7/Conquering_the_Universe_Alone/assets/60610390/fdec7778-de0f-4d6a-88a3-8e017c13c169)|![그림3](https://github.com/zachpaul7/Conquering_the_Universe_Alone/assets/60610390/60095acf-437a-402a-b534-4208f0715418)|
 <br/>
 
+- 게임 플레이 영상
+  - https://github.com/zachpaul7/Conquering_the_Universe_Alone/assets/60610390/81e78a82-a382-4b43-9a63-4b1150a3c9a9
+
+
 ## 🏆 시상
 
 |경남 소프트웨어 입선|교내 IU 커스텀 학점제 우수상|
